@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError,  } from 'rxjs/operators';
 import { HttpModule } from './http.type';
+import { TokenService } from '../token/token.service';
 
 export const SERVER_REST_URL = environment.apiBaseHref;
 export const DEFAULT_HEADERS = {
@@ -21,17 +22,16 @@ export class HttpService implements HttpModule.IHttpService {
   private _defaultHeaders = DEFAULT_HEADERS;
 
   constructor(
-    private _http: HttpClient
+    private _http: HttpClient,
+    private _tokenService: TokenService
   ) { }
 
   private _createAuthHeaders(): HttpHeaders {
-    // const headers = new HttpHeaders(this._defaultHeaders);
-    // const token = this._tokenService.getToken();
-    // if (token) {
-      // return headers.append('Authorization', `JWT ${token}`);
-    // }
-    // return headers;
     const headers = new HttpHeaders(this._defaultHeaders);
+    const token = this._tokenService.getToken();
+    if (token) {
+      return headers.append('Authorization', `Token ${token}`);
+    }
     return headers;
   }
 
@@ -45,7 +45,7 @@ export class HttpService implements HttpModule.IHttpService {
   }
 
   public postData(url: string, data?: {}): Observable<any> {
-    return this._http.post(url, data, {
+    return this._http.post(this._apiUrl + url, data, {
       headers: this._createAuthHeaders()
     }).pipe(
       catchError(err => this._handleError(err))
@@ -53,7 +53,7 @@ export class HttpService implements HttpModule.IHttpService {
   }
 
   public putData(url: string, data?: {}): Observable<any> {
-    return this._http.put(url, data, {
+    return this._http.put(this._apiUrl + url, data, {
       headers: this._createAuthHeaders()
     }).pipe(
       catchError(err => this._handleError(err))
@@ -61,7 +61,7 @@ export class HttpService implements HttpModule.IHttpService {
   }
 
   public patchData(url: string, data?: {}): Observable<any> {
-    return this._http.patch(url, data, {
+    return this._http.patch(this._apiUrl + url, data, {
       headers: this._createAuthHeaders()
     }).pipe(
       catchError(err => this._handleError(err))
@@ -69,10 +69,6 @@ export class HttpService implements HttpModule.IHttpService {
   }
 
   private _handleError(err): Observable<any> {
-    // if (err.error.code !== 10) {
-    //   this._notificationService.show(notificationTypes.SERVER_ERROR, err.error.text);
-    // }
-    // this._preloaderService.hide();
-    return Observable.throw(err.error);
+    return throwError(err.error);
   }
 }
