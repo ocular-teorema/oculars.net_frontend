@@ -1,0 +1,20 @@
+{
+  "/api/v1": {
+    "target": " http://oculars.net/api/v1",
+    "pathRewrite": {
+      "^/api/v1": ""
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/rest-auth": {
+    "target": " http://oculars.net/rest-auth",
+    "pathRewrite": {
+      "^/rest-auth": ""
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
