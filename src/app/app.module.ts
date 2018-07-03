@@ -11,6 +11,8 @@ import { LkComponent } from './components/lk/lk.component';
 import { UserService } from './services/user/user.service';
 import { StoreModule } from '@ngrx/store';
 import { TokenService } from './services/token/token.service';
+import { HttpClientModule } from '@angular/common/http';
+import { reducers } from './store';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import { TokenService } from './services/token/token.service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({})
+    StoreModule.forRoot(reducers)
   ],
   providers: [
     HttpService,
