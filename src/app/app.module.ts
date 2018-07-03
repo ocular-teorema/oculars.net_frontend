@@ -10,6 +10,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { LkComponent } from './components/lk/lk.component';
 import { UserService } from './services/user/user.service';
 import { StoreModule } from '@ngrx/store';
+import { TokenService } from './services/token/token.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { StoreModule } from '@ngrx/store';
   ],
   providers: [
     HttpService,
-    UserService
+    UserService,
+    TokenService
   ],
   bootstrap: [AppComponent]
 })
