@@ -7,14 +7,5 @@
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
-  },
-  "/rest-auth": {
-    "target": " http://oculars.net/rest-auth",
-    "pathRewrite": {
-      "^/rest-auth": ""
-    },
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
   }
 }

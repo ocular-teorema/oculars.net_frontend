@@ -1,0 +1,42 @@
+.header {
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    &--nav {
+      background-color: #2b91ed;
+      padding: 20px 10px 20px 60px;
+      justify-content: flex-start;
+      a {
+        color: #fff;
+        font-size: 15px;
+        text-decoration: none;
+        cursor: pointer;
+        margin-right: 30px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  &__user {
+    display: flex;
+    align-items: center;
+    img {
+      margin-right: 10px;
+    }
+    &__info {
+      div {
+        margin-bottom: 5px;
+      }
+    }
+    &__name {
+      font-weight: bold;
+    }
+    &__logout {
+      color: #000;
+      cursor: pointer;
+    }
+  }
+}
