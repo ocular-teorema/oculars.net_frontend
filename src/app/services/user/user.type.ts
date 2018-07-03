@@ -4,13 +4,22 @@ export namespace UserModule {
   export interface IToken {
     key: String;
   }
-  export interface IUser {
+  export interface ILogin {
     email?: string;
     login?: string;
     password1?: string;
     password?: string;
   }
+  export interface IUser {
+    id: number;
+    username: string;
+    hardware_hash: string;
+    cam_list: {};
+  }
   export interface IUserService {
-    registerUser(data: IUser): Observable<IToken>;
+    registerUser(data: ILogin): Observable<IToken>;
+    getProfiles(): Observable<IUser[]>;
+    logout(): Observable<any>;
+    login(data: ILogin): Observable<IToken>;
   }
 }
