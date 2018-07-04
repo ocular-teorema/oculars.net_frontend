@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         } else {
           this._store.dispatch(new AddUser(profiles[0]));
         }
-        this._route.navigate(['/lk']);
+        this._route.navigate(['/account/lk']);
       });
   }
 
