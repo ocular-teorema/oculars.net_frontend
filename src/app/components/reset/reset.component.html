@@ -1,0 +1,21 @@
+<div class="login-container">
+    <section class="login">
+      <img src="assets/img/header/logo.png" alt="ocular">
+      <div class="login__row">
+        <div class="block">
+          <form (ngSubmit)="onSubmit(resetForm)" #resetForm="ngForm">
+            <input
+              required
+              ngModel name="email"
+              placeholder="Email"
+              type="email"
+              pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"
+            >
+            <div class="block__info block__info--login">Проверьте правильность данных</div>
+            <button [disabled]="!resetForm.valid"
+            class="button" type="submit">Восстановить</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>

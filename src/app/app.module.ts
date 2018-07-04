@@ -14,6 +14,7 @@ import { TokenService } from './services/token/token.service';
 import { HttpClientModule } from '@angular/common/http';
 import { reducers } from './store';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
+import { ResetComponent } from './components/reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AuthGuardService } from './services/auth-guard/auth-guard.service';
     LoginComponent,
     HeaderComponent,
     ProfileComponent,
-    LkComponent
+    LkComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,11 @@
+@import '../login/login.component.scss';
+
+.login {
+  width: 400px;
+  &__row {
+    justify-content: center;
+    .block {
+      width: 100%;
+    }
+  }
+}

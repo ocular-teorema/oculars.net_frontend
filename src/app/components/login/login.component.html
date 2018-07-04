@@ -20,7 +20,7 @@
           <div class="block__info block__info--login">Неверный логин или пароль</div>
           <button [disabled]="!loginForm.valid"
           class="button" type="submit">Войти</button>
-          <a href="#">Восстановить пароль</a>
+          <a [routerLink]="['/account/reset']">Восстановить пароль</a>
         </form>
       </div>
       <div class="block block--signup">
