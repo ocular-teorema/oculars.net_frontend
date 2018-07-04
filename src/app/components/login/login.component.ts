@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           password: loginForm.value.password
         })
         .subscribe(res => {
-          this._addProfileToStore(loginForm.value.login);
+          this._addProfileToStore();
         });
     }
   }
@@ -45,19 +45,19 @@ export class LoginComponent implements OnInit, OnDestroy {
           password1: registerForm.value.password1
         })
         .subscribe(res => {
-          this._addProfileToStore(registerForm.value.email);
+          this._addProfileToStore();
         });
     }
   }
 
-  private _addProfileToStore(email: string): void {
+  private _addProfileToStore(): void {
     this._profileSubscription = this._userService
       .getProfiles()
       .subscribe(profiles => {
         if (profiles.length > 1) {
-          const currentProfile = profiles.filter(profile => {
-            profile.username === email;
-          });
+          const currentProfile = profiles.filter(
+            profile => profile.is_superuser
+          );
           this._store.dispatch(new AddUser(currentProfile[0]));
         } else {
           this._store.dispatch(new AddUser(profiles[0]));

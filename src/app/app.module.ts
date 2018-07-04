@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import { TokenService } from './services/token/token.service';
 import { HttpClientModule } from '@angular/common/http';
 import { reducers } from './store';
+import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { reducers } from './store';
   providers: [
     HttpService,
     UserService,
-    TokenService
+    TokenService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

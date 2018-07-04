@@ -15,6 +15,7 @@ export namespace UserModule {
     username: string;
     hardware_hash: string;
     cam_list: {};
+    is_superuser: boolean;
   }
   export interface IUserService {
     registerUser(data: ILogin): Observable<IToken>;
