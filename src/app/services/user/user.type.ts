@@ -30,6 +30,7 @@ export namespace UserModule {
     getProfiles(): Observable<IUser[]>;
     changeProfile(data: IUser): Observable<IUser>;
     changePassword(data: INewPass): Observable<any>;
+    resetPassword(email: string): Observable<any>;
     logout(): Observable<any>;
     login(data: ILogin): Observable<IToken>;
   }

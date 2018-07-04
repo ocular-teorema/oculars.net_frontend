@@ -10,7 +10,9 @@ const REGISTRATION_URL = REST_AUTH_URL + 'registration/';
 const LOGOUT_URL = REST_AUTH_URL + 'logout/';
 const LOGIN_URL = REST_AUTH_URL + 'login/';
 const PROFILE_URL = '/profile/';
-const CHANGE_PASSWORD_URL = REST_AUTH_URL + 'password/change/';
+const PASSWORD_URL = REST_AUTH_URL + 'password/';
+const CHANGE_PASSWORD_URL = PASSWORD_URL + 'change/';
+const RESET_PASSWORD_URL = PASSWORD_URL + 'reset/';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,10 @@ export class UserService implements UserModule.IUserService {
 
   changePassword(data: UserModule.INewPass): Observable<any> {
     return this._httpService.postData(CHANGE_PASSWORD_URL, data);
+  }
+
+  resetPassword(email: string): Observable<any> {
+    return this._httpService.postData(RESET_PASSWORD_URL, {email});
   }
 
   login(data: UserModule.ILogin): Observable<UserModule.IToken> {
