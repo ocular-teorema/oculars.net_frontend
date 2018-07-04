@@ -12,10 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  private _registerSubscription = new Subscription();
-  private _profileSubscription = new Subscription();
-  private _loginSubscription = new Subscription();
-  private _logoutSubscription = new Subscription();
+  private _loginSubscriptions = new Subscription();
 
   constructor(
     private _userService: UserService,
@@ -24,14 +21,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this._loginSubscription = this._userService.logout().subscribe(res => {
+    const logoutSubscription = this._userService.logout().subscribe(res => {
       this._store.dispatch(new AddUser({}));
     })
+    this._loginSubscriptions.add(logoutSubscription);
   }
 
   public loginSubmit(loginForm: NgForm) {
     if (loginForm.valid) {
-      this._loginSubscription = this._userService
+      const loginSubscription = this._userService
         .login({
           username: loginForm.value.login,
           password: loginForm.value.password
@@ -39,12 +37,13 @@ export class LoginComponent implements OnInit, OnDestroy {
         .subscribe(res => {
           this._addProfileToStore();
         });
+      this._loginSubscriptions.add(loginSubscription);
     }
   }
 
   public registerSubmit(registerForm: NgForm) {
     if (registerForm.valid) {
-      this._registerSubscription = this._userService
+      const registerSubscription = this._userService
         .registerUser({
           email: registerForm.value.email,
           password1: registerForm.value.password1
@@ -52,11 +51,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         .subscribe(res => {
           this._addProfileToStore();
         });
+      this._loginSubscriptions.add(registerSubscription);
     }
   }
 
   private _addProfileToStore(): void {
-    this._profileSubscription = this._userService
+    const profileSubscription = this._userService
       .getProfiles()
       .subscribe(profiles => {
         if (profiles.length > 1) {
@@ -69,12 +69,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
         this._route.navigate(['/account/lk']);
       });
+    this._loginSubscriptions.add(profileSubscription);
   }
 
   ngOnDestroy() {
-    this._registerSubscription.unsubscribe();
-    this._profileSubscription.unsubscribe();
-    this._loginSubscription.unsubscribe();
-    this._logoutSubscription.unsubscribe();
+    this._loginSubscriptions.unsubscribe();
   }
 }

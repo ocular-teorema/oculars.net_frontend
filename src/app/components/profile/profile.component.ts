@@ -14,18 +14,16 @@ import { AddUser } from '../../store/actions';
 export class ProfileComponent implements OnInit, OnDestroy {
   public userModel: UserModule.IUser;
   private _currentEmail: string;
-  private _storeSubscription = new Subscription();
-  private _loginSubscription = new Subscription();
-  private _profileSubscription = new Subscription();
-  private _passwordSubscription = new Subscription();
+  private _profileSubscriptions = new Subscription();
 
   constructor(private _store: Store<any>, private _user: UserService) {}
 
   ngOnInit() {
-    this._storeSubscription = this._store.select('common').subscribe(state => {
+    const storeSubscription = this._store.select('common').subscribe(state => {
       this.userModel = state.userModel;
       this._currentEmail = state.userModel.username;
     });
+    this._profileSubscriptions.add(storeSubscription);
   }
 
   public changeEmail(e): void {
@@ -34,7 +32,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   public onSubmit(profileForm: NgForm): void {
     if (profileForm.valid) {
-      this._loginSubscription = this._user
+      const loginSubscription = this._user
         .login({
           username: this._currentEmail,
           password: profileForm.value.password
@@ -45,28 +43,32 @@ export class ProfileComponent implements OnInit, OnDestroy {
           };
           if (this.userModel.username !== this._currentEmail) {
             request['username'] = this.userModel.username;
-            this._profileSubscription = this._user.changeProfile({
-              ...request
-            }).subscribe(res => {
-              this._store.dispatch(new AddUser(res))
-            })
+            const profileSubscription = this._user
+              .changeProfile({
+                ...request
+              })
+              .subscribe(res => {
+                this._store.dispatch(new AddUser(res));
+              });
+            this._profileSubscriptions.add(profileSubscription);
           }
           if (profileForm.value.new_password1) {
             const passRequest = {
               new_password1: profileForm.value.new_password1,
               new_password2: profileForm.value.new_password2
-            }
-            this._passwordSubscription = this._user.changePassword(passRequest).subscribe()
+            };
+            const passwordSubscription = this._user
+              .changePassword(passRequest)
+              .subscribe();
+            this._profileSubscriptions.add(passwordSubscription);
           }
           profileForm.reset();
         });
+      this._profileSubscriptions.add(loginSubscription);
     }
   }
 
   ngOnDestroy() {
-    this._storeSubscription.unsubscribe();
-    this._loginSubscription.unsubscribe();
-    this._profileSubscription.unsubscribe();
-    this._passwordSubscription.unsubscribe();
+    this._profileSubscriptions.unsubscribe();
   }
 }

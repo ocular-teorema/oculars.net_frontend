@@ -11,8 +11,7 @@ import { AddUser } from '../../store/actions';
   styleUrls: ['./lk.component.scss']
 })
 export class LkComponent implements OnInit, OnDestroy {
-  private _storeSubscription = new Subscription();
-  private _userSubscription = new Subscription();
+  private _lkSubscriptions = new Subscription();
   public userModel: UserModule.IUser;
   public camList = {
     s: 0,
@@ -23,9 +22,10 @@ export class LkComponent implements OnInit, OnDestroy {
   constructor(private _store: Store<any>, private _user: UserService) {}
 
   ngOnInit() {
-    this._storeSubscription = this._store.select('common').subscribe(state => {
+    const storeSubscription = this._store.select('common').subscribe(state => {
       this.userModel = state.userModel;
     });
+    this._lkSubscriptions.add(storeSubscription);
   }
 
   public addCamera(type: string): void {
@@ -41,7 +41,7 @@ export class LkComponent implements OnInit, OnDestroy {
     Object.keys(this.userModel.cam_list).forEach(type => {
       cam_list[type] = this.camList[type] + this.userModel.cam_list[type];
     });
-    this._userSubscription = this._user
+    const userSubscription = this._user
       .changeProfile({
         id: this.userModel.id,
         cam_list
@@ -54,10 +54,10 @@ export class LkComponent implements OnInit, OnDestroy {
           a: 0
         };
       });
+      this._lkSubscriptions.add(userSubscription);
   }
 
   ngOnDestroy() {
-    this._storeSubscription.unsubscribe();
-    this._userSubscription.unsubscribe();
+    this._lkSubscriptions.unsubscribe();
   }
 }
