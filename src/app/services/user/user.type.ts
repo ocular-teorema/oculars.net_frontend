@@ -6,7 +6,7 @@ export namespace UserModule {
   }
   export interface ILogin {
     email?: string;
-    login?: string;
+    username?: string;
     password1?: string;
     password?: string;
   }
