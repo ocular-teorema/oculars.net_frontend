@@ -14,7 +14,11 @@ export namespace UserModule {
     id: number;
     username: string;
     hardware_hash: string;
-    cam_list: {};
+    cam_list: {
+      s: string;
+      a: string;
+      f: string;
+    };
     is_superuser: boolean;
   }
   export interface IUserService {
