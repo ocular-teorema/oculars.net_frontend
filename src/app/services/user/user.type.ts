@@ -21,10 +21,15 @@ export namespace UserModule {
     };
     is_superuser?: boolean;
   }
+  export interface INewPass {
+    new_password1: string;
+    new_password2: string;
+  }
   export interface IUserService {
     registerUser(data: ILogin): Observable<IToken>;
     getProfiles(): Observable<IUser[]>;
     changeProfile(data: IUser): Observable<IUser>;
+    changePassword(data: INewPass): Observable<any>;
     logout(): Observable<any>;
     login(data: ILogin): Observable<IToken>;
   }

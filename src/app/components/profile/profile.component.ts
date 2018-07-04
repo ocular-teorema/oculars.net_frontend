@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private _storeSubscription = new Subscription();
   private _loginSubscription = new Subscription();
   private _profileSubscription = new Subscription();
+  private _passwordSubscription = new Subscription();
 
   constructor(private _store: Store<any>, private _user: UserService) {}
 
@@ -44,16 +45,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
           };
           if (this.userModel.username !== this._currentEmail) {
             request['username'] = this.userModel.username;
+            this._profileSubscription = this._user.changeProfile({
+              ...request
+            }).subscribe(res => {
+              this._store.dispatch(new AddUser(res))
+            })
           }
           if (profileForm.value.new_password1) {
-            request['new_password1'] = profileForm.value.new_password1;
-            request['new_password2'] = profileForm.value.new_password2;
+            const passRequest = {
+              new_password1: profileForm.value.new_password1,
+              new_password2: profileForm.value.new_password2
+            }
+            this._passwordSubscription = this._user.changePassword(passRequest).subscribe()
           }
-          this._profileSubscription = this._user.changeProfile({
-            ...request
-          }).subscribe(res => {
-            this._store.dispatch(new AddUser(res))
-          })
           profileForm.reset();
         });
     }
@@ -63,5 +67,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this._storeSubscription.unsubscribe();
     this._loginSubscription.unsubscribe();
     this._profileSubscription.unsubscribe();
+    this._passwordSubscription.unsubscribe();
   }
 }
