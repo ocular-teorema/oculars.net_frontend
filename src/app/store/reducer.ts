@@ -5,7 +5,7 @@ export function commonReducer(state: {}, action: CommonActionsUnion): {} {
     case CommonTypes.ADD_USER: {
       return {
         ...state,
-        ...action.payload
+        userModel: action.payload
       };
     }
 

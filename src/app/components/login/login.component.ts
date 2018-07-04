@@ -1,21 +1,26 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { NgForm } from "@angular/forms";
-import { UserService } from "../../services/user/user.service";
-import { Store } from "@ngrx/store";
-import { Subscription } from "rxjs";
-import { AddUser } from "../../store/actions";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { UserService } from '../../services/user/user.service';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { AddUser } from '../../store/actions';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private _registerSubscription = new Subscription();
   private _profileSubscription = new Subscription();
   private _loginSubscription = new Subscription();
 
-  constructor(private _userService: UserService, private _store: Store<any>) {}
+  constructor(
+    private _userService: UserService,
+    private _store: Store<any>,
+    private _route: Router
+  ) {}
 
   ngOnInit() {}
 
@@ -57,6 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         } else {
           this._store.dispatch(new AddUser(profiles[0]));
         }
+        this._route.navigate(['/lk']);
       });
   }
 

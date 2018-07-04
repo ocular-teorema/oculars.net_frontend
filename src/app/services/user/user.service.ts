@@ -1,18 +1,18 @@
-import { Injectable } from "@angular/core";
-import { HttpService } from "../http/http.service";
-import { TokenService } from "../token/token.service";
-import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
-import { UserModule } from "./user.type";
+import { Injectable } from '@angular/core';
+import { HttpService } from '../http/http.service';
+import { TokenService } from '../token/token.service';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { UserModule } from './user.type';
 
-const REST_AUTH = "/rest-auth/";
-const REGISTRATION = REST_AUTH + "registration/";
-const LOGOUT = REST_AUTH + "logout/";
-const LOGIN = REST_AUTH + "login/";
-const PROFILE = "/profile/";
+const REST_AUTH = '/rest-auth/';
+const REGISTRATION = REST_AUTH + 'registration/';
+const LOGOUT = REST_AUTH + 'logout/';
+const LOGIN = REST_AUTH + 'login/';
+const PROFILE = '/profile/';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class UserService implements UserModule.IUserService {
   constructor(
