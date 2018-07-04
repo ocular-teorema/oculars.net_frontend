@@ -1,3 +1,40 @@
-<p>
-  profile works!
-</p>
+<section class="container">
+  <h1 class="title">
+    Профиль
+  </h1>
+  <div class="row">
+    <div class="block block--form">
+      <form (ngSubmit)="onSubmit(profileForm)" #profileForm="ngForm">
+        <label>
+          <div>ЭЛ. ПОЧТА ДЛЯ УВЕДОМЛЕНИЙ</div>
+          <input [value]='userModel.username' (input)='changeEmail($event)' type="email">
+        </label>
+        <label>
+          <div>пароль</div>
+          <input
+            required
+            #password="ngModel"
+            ngModel name="password"
+            type="password">
+        </label>
+        <label>
+          <div>Новый пароль</div>
+          <input #new_password1="ngModel"
+            ngModel name="new_password1"
+            type="password">
+        </label>
+        <label>
+          <div>Повторите новый пароль</div>
+          <input #new_password2="ngModel"
+            ngModel name="new_password2"
+            type="password">
+        </label>
+        <button [disabled]="!(profileForm.valid && (
+          (userModel.username && !new_password1.value && !new_password2.value) ||
+          (new_password1.value && new_password2.value &&
+          (new_password1.value === new_password2.value))
+        ))" class="button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+</section>

@@ -59,5 +59,17 @@ body {
   margin-bottom: 20px;
 }
 
+.container {
+  padding: 20px 105px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  &--right {
+    justify-content: flex-end;
+  }
+}
+
 @import './assets/styles/_buttons.scss';
 @import './assets/styles/_inputs.scss';

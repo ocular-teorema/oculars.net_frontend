@@ -1,15 +1,3 @@
-.container {
-  padding: 20px 105px;
-}
-
-.row {
-  display: flex;
-  align-items: center;
-  &--right {
-    justify-content: flex-end;
-  }
-}
-
 .cameras {
   .block {
     &--table {
