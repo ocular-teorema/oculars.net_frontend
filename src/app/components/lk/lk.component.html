@@ -89,6 +89,7 @@
       </table>
       <div class="row row--right">
         <button [disabled]="(camList.f + camList.a + camList.s) === 0"
+        (click)="saveCameras()"
         class="button button--full">пополнить счет</button>
       </div>
     </div>
