@@ -23,7 +23,7 @@ export class UserService implements UserModule.IUserService {
     private _tokenService: TokenService
   ) {}
 
-  registerUser(data: UserModule.ILogin): Observable<UserModule.IToken> {
+  public registerUser(data: UserModule.ILogin): Observable<UserModule.IToken> {
     return this._httpService.postData(REGISTRATION_URL, data).pipe(
       tap(res => {
         this._tokenService.setToken(res.key);
@@ -31,23 +31,23 @@ export class UserService implements UserModule.IUserService {
     );
   }
 
-  getProfiles(): Observable<UserModule.IUser[]> {
+  public getProfiles(): Observable<UserModule.IUser[]> {
     return this._httpService.getData(PROFILE_URL);
   }
 
-  changeProfile(data: UserModule.IUser): Observable<UserModule.IUser> {
+  public changeProfile(data: UserModule.IUser): Observable<UserModule.IUser> {
     return this._httpService.patchData(`${PROFILE_URL}/${data.id}`, data);
   }
 
-  changePassword(data: UserModule.INewPass): Observable<any> {
+  public changePassword(data: UserModule.INewPass): Observable<any> {
     return this._httpService.postData(CHANGE_PASSWORD_URL, data);
   }
 
-  resetPassword(email: string): Observable<any> {
+  public resetPassword(email: string): Observable<any> {
     return this._httpService.postData(RESET_PASSWORD_URL, {email});
   }
 
-  login(data: UserModule.ILogin): Observable<UserModule.IToken> {
+  public login(data: UserModule.ILogin): Observable<UserModule.IToken> {
     return this._httpService.postData(LOGIN_URL, data).pipe(
       tap(res => {
         this._tokenService.setToken(res.key);

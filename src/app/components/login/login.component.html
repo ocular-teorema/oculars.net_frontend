@@ -3,6 +3,7 @@
     <img src="assets/img/header/logo.png" alt="ocular">
     <div class="login__row">
       <div class="block block--login">
+        <div class="block__title">Вход</div>
         <form (ngSubmit)="loginSubmit(loginForm)" #loginForm="ngForm">
           <input
             required
@@ -24,6 +25,7 @@
         </form>
       </div>
       <div class="block block--signup">
+        <div class="block__title">Регистрация</div>
         <form (ngSubmit)="registerSubmit(registerForm)" #registerForm="ngForm">
           <input
             required

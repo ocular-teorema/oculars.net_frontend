@@ -16,7 +16,7 @@ export class AuthGuardService {
     private _store: Store<any>
   ) {}
 
-  canActivate() {
+  public canActivate() {
     return this._user
       .getProfiles()
       .toPromise()
