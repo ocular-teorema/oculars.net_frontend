@@ -12,18 +12,19 @@ export namespace UserModule {
   }
   export interface IUser {
     id: number;
-    username: string;
-    hardware_hash: string;
-    cam_list: {
-      s: string;
-      a: string;
-      f: string;
+    username?: string;
+    hardware_hash?: string;
+    cam_list?: {
+      s?: number;
+      a?: number;
+      f?: number;
     };
-    is_superuser: boolean;
+    is_superuser?: boolean;
   }
   export interface IUserService {
     registerUser(data: ILogin): Observable<IToken>;
     getProfiles(): Observable<IUser[]>;
+    changeProfile(data: IUser): Observable<IUser>;
     logout(): Observable<any>;
     login(data: ILogin): Observable<IToken>;
   }

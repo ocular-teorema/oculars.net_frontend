@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { UserModule } from './user.type';
 
-const REST_AUTH = '/rest-auth/';
-const REGISTRATION = REST_AUTH + 'registration/';
-const LOGOUT = REST_AUTH + 'logout/';
-const LOGIN = REST_AUTH + 'login/';
-const PROFILE = '/profile/';
+const REST_AUTH_URL = '/rest-auth/';
+const REGISTRATION_URL = REST_AUTH_URL + 'registration/';
+const LOGOUT_URL = REST_AUTH_URL + 'logout/';
+const LOGIN_URL = REST_AUTH_URL + 'login/';
+const PROFILE_URL = '/profile/';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class UserService implements UserModule.IUserService {
   ) {}
 
   registerUser(data: UserModule.ILogin): Observable<UserModule.IToken> {
-    return this._httpService.postData(REGISTRATION, data).pipe(
+    return this._httpService.postData(REGISTRATION_URL, data).pipe(
       tap(res => {
         this._tokenService.setToken(res.key);
       })
@@ -29,11 +29,15 @@ export class UserService implements UserModule.IUserService {
   }
 
   getProfiles(): Observable<UserModule.IUser[]> {
-    return this._httpService.getData(PROFILE);
+    return this._httpService.getData(PROFILE_URL);
+  }
+
+  changeProfile(data: UserModule.IUser): Observable<UserModule.IUser> {
+    return this._httpService.patchData(`${PROFILE_URL}/${data.id}`, data);
   }
 
   login(data: UserModule.ILogin): Observable<UserModule.IToken> {
-    return this._httpService.postData(LOGIN, data).pipe(
+    return this._httpService.postData(LOGIN_URL, data).pipe(
       tap(res => {
         this._tokenService.setToken(res.key);
       })
@@ -42,7 +46,7 @@ export class UserService implements UserModule.IUserService {
 
   logout(): Observable<any> {
     return this._httpService
-      .postData(LOGOUT)
+      .postData(LOGOUT_URL)
       .pipe(tap(() => this._tokenService.deleteToken()));
   }
 }
