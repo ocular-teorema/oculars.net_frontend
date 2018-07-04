@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private _registerSubscription = new Subscription();
   private _profileSubscription = new Subscription();
   private _loginSubscription = new Subscription();
+  private _logoutSubscription = new Subscription();
 
   constructor(
     private _userService: UserService,
@@ -22,7 +23,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _route: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._loginSubscription = this._userService.logout().subscribe(res => {
+      this._store.dispatch(new AddUser({}));
+    })
+  }
 
   public loginSubmit(loginForm: NgForm) {
     if (loginForm.valid) {
@@ -70,5 +75,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this._registerSubscription.unsubscribe();
     this._profileSubscription.unsubscribe();
     this._loginSubscription.unsubscribe();
+    this._logoutSubscription.unsubscribe();
   }
 }

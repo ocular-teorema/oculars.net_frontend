@@ -11,7 +11,7 @@ export namespace UserModule {
     password?: string;
   }
   export interface IUser {
-    id: number;
+    id?: number;
     username?: string;
     hardware_hash?: string;
     cam_list?: {

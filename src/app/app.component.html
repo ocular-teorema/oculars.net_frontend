@@ -1,2 +1,2 @@
-<app-header *ngIf="userModel"></app-header>
+<app-header [username]="userModel && userModel.username" *ngIf="userModel && userModel.id"></app-header>
 <router-outlet></router-outlet>
