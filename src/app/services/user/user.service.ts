@@ -36,7 +36,7 @@ export class UserService implements UserModule.IUserService {
   }
 
   public changeProfile(data: UserModule.IUser): Observable<UserModule.IUser> {
-    return this._httpService.patchData(`${PROFILE_URL}/${data.id}`, data);
+    return this._httpService.patchData(PROFILE_URL + data.id, data);
   }
 
   public changePassword(data: UserModule.INewPass): Observable<any> {
