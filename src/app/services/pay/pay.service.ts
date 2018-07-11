@@ -15,7 +15,7 @@ export class PayService implements PayModule.IPayService {
     private _http: HttpService
   ) { }
 
-  public camPay(data: PayModule.IPayData): Observable<any> {
+  public camPay(data: PayModule.IPayData): Observable<PayModule.IResponse> {
     return this._http.postData(PAY_CAM_URL, data);
   }
 
