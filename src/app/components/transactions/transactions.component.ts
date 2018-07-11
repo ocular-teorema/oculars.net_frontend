@@ -16,7 +16,7 @@ export class TransactionsComponent implements OnInit {
 
   public ngOnInit() {
     this._pay.getTransactions().subscribe(res => {
-      this.transactions = res;
+      this.transactions = res.reverse();
     });
   }
 
