@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http/http.service';
@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { reducers } from './store';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { ResetComponent } from './components/reset/reset.component';
+import { TransactionsComponent } from './components/transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ResetComponent } from './components/reset/reset.component';
     HeaderComponent,
     ProfileComponent,
     LkComponent,
-    ResetComponent
+    ResetComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,
