@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const logoutSubscription = this._userService.logout().subscribe(res => {
       this._store.dispatch(new AddUser({}));
-    })
+    });
     this._loginSubscriptions.add(logoutSubscription);
   }
 
