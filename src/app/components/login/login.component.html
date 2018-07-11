@@ -1,0 +1,62 @@
+<div class="login-container">
+  <section class="login">
+    <img src="assets/img/header/logo.png" alt="ocular">
+    <div class="login__row">
+      <div class="block block--login">
+        <div class="block__title">Вход</div>
+        <form (ngSubmit)="loginSubmit(loginForm)" #loginForm="ngForm">
+          <input
+            required
+            ngModel name="login"
+            placeholder="Логин"
+            type="email"
+            pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"
+          >
+          <input
+            required
+            ngModel name="password" 
+            placeholder="Пароль"
+            type="password"
+          >
+          <div class="block__info block__info--login">Неверный логин или пароль</div>
+          <button [disabled]="!loginForm.valid"
+          class="button" type="submit">Войти</button>
+          <a [routerLink]="['/account/reset']">Восстановить пароль</a>
+        </form>
+      </div>
+      <div class="block block--signup">
+        <div class="block__title">Регистрация</div>
+        <form (ngSubmit)="registerSubmit(registerForm)" #registerForm="ngForm">
+          <input
+            required
+            ngModel name="email" 
+            placeholder="Email"
+            name="email"
+            type="email"
+            pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"
+          >
+          <input
+            required
+            ngModel name="password1"
+            #password1="ngModel"
+            placeholder="Пароль"
+            type="password"
+            minlength="8"
+          >
+          <input
+            required
+            ngModel name="password2" 
+            #password2="ngModel"
+            placeholder="Пароль"
+            type="password"
+            minlength="8"
+          >
+          <div class="block__info block__info--common">Пароли не совпадают</div>
+          <div class="block__info block__info--short">Пароль слишком простой</div>
+          <button [disabled]="!(registerForm.valid && (password1.value === password2.value))" 
+          class="button" type="submit">Зарегистрироваться</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

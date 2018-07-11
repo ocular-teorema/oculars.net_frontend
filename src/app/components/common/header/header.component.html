@@ -1,0 +1,16 @@
+<header class="header">
+  <div class="header__row">
+    <img src="../../../../assets/img/header/logo.png" alt="">
+    <div class="header__user">
+      <div class="header__user__info">
+        <div class="header__user__name">{{username}}</div>
+        <a [routerLink]="['/account/login']" class="header__user__logout">Выход</a>
+      </div>
+    </div>
+  </div>
+  <div class="header__row header__row--nav nav">
+    <a [routerLink]="['/account/lk']" class="nav__item">Личный кабинет</a>
+    <a [routerLink]="['/account/profile']" class="nav__item">Профиль</a>
+    <a href="#" class="nav__item">Загрузить дистрибутив</a>
+  </div>
+</header>

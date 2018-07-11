@@ -1,0 +1,120 @@
+.cameras {
+  .block {
+    &--table {
+      width: 75%;
+      margin-right: 46px;
+      input {
+        margin-bottom: 0;
+        width: auto;
+      }
+      .id {
+        margin-right: 30px;
+        font-weight: bold;
+      }
+      .id-input {
+        margin-bottom: 30px;
+      }
+    }
+    &--internet {
+      width: 30%;
+      border-left: 1px solid #d8d8d8;
+      padding-left: 18px;
+    }
+  }
+  .internet {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: flex-start;
+    &__title {
+      background: url("../../../assets/img/lk/lamp.png") no-repeat;
+      padding: 9px 0 9px 47px;
+      color: #000000;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+    input {
+      width: auto;
+    }
+    &__text {
+      color: #4c4c4c;
+      font-size: 14px;
+      line-height: 22px;
+      margin-bottom: 15px;
+    }
+    .hash {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0;
+      text-decoration: underline;
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    thead {
+      td {
+        font-size: 14px;
+        padding: 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #838383;
+        text-align: center;
+        &:first-child {
+          text-align: left;
+        }
+      }
+    }
+    tbody {
+      tr {
+        border-bottom: 7px solid #fff;
+        background-color: #fafafa;
+        td {
+          padding: 20px 10px;
+          text-align: center;
+          &:first-child {
+            text-align: left;
+            padding-left: 10px;
+          }
+          &:last-child {
+            font-weight: bold;
+            width: 150px;
+          }
+        }
+        .summary {
+          div {
+            text-align: left;
+          }
+          &__title {
+            color: #818181;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+          }
+          &__number {
+            color: #000000;
+            font-size: 24px;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+
+  .counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    input {
+      margin: 0 10px;
+      width: 65px;
+      border-radius: 4px;
+      border: 1px solid #c2c2c2;
+      background-color: #ffffff;
+      text-align: center;
+    }
+  }
+}

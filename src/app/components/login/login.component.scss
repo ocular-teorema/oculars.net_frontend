@@ -1,0 +1,91 @@
+.login-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  .login {
+    width: 700px;
+    top: 200px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #2b91ed;
+    position: absolute;
+    padding: 20px;
+    border-radius: 30px;
+    &__row {
+      padding-top: 20px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .block {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      &__title {
+        margin-bottom: 15px;
+        font-size: 14px;
+        padding: 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #838383;
+        text-align: center;
+      }
+      &--login {
+        border-right: 2px solid #e1e1e1;
+        width: 60%;
+        form {
+          width: 300px;
+        }
+      }
+    &--signup {
+      width: 40%;
+    }
+    &__info {
+      margin-bottom: 15px;
+      color: #f57575;
+      display: none;
+      &.visible {
+        display: block;
+      }
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+
+input {
+  width: 100%;
+  border-radius: 5px;
+  background: #fff;
+  padding: 10px;
+  border: 2px solid #e1e1e1;
+  font-size: 16px;
+  margin-bottom: 20px;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.container {
+  padding: 20px 105px;
+}
+
+.row {
+}
