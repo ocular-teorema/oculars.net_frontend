@@ -62,17 +62,19 @@ export class LkComponent implements OnInit, OnDestroy {
       ...request,
       cam
     };
+    const paySub = this._pay.camPay(request).subscribe(result => {
+      window.location.href = result.success_url;
+    });
+    this._lkSubscriptions.add(paySub);
+  }
+
+  public saveId() {
     const userSub = this._user
       .changeProfile({
         id: this.userModel.id,
         hardware_hash: this.userModel.hardware_hash
       })
-      .subscribe(res => {
-        const paySub = this._pay.camPay(request).subscribe(result => {
-          window.location.href = result.success_url;
-        });
-        this._lkSubscriptions.add(paySub);
-      });
+      .subscribe(res => {});
     this._lkSubscriptions.add(userSub);
   }
 

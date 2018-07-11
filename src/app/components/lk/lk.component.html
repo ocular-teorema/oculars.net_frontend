@@ -11,6 +11,9 @@
           [disabled]='isHashAvailable'
           type="text"
         >
+        <button *ngIf="!isHashAvailable"
+        (click)="saveId()"
+        class="button button--full">сохранить</button>
       </div>
       <table>
         <thead>
