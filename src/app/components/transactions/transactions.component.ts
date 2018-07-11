@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { PayService } from '../../services/pay/pay.service';
 
 @Component({
   selector: 'app-transactions',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transactions.component.scss']
 })
 export class TransactionsComponent implements OnInit {
+  @Input() isSuperuser: boolean;
+  public transactions: Array<{}>;
 
-  constructor() { }
+  constructor(
+    private _pay: PayService
+  ) { }
 
-  ngOnInit() {
+  public ngOnInit() {
+    this._pay.getTransactions().subscribe(res => {
+      this.transactions = res;
+    });
   }
 
 }

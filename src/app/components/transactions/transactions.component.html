@@ -1,3 +1,32 @@
-<p>
-  transactions works!
-</p>
+<h2 class="transactions-title">
+  Список транзакций
+</h2>
+<table class="transactions">
+  <thead>
+    <tr>
+      <td *ngIf="isSuperuser">
+        ID
+      </td>
+      <td>
+        Статус
+      </td>
+      <td>
+        Сумма
+      </td>
+    </tr>
+  </thead>
+  <tbody *ngIf="transactions">
+    <tr *ngFor="let transaction of transactions">
+      <td *ngIf="isSuperuser">
+        {{transaction.user_id}}
+      </td>
+      <td>
+        {{transaction.status}}
+      </td>
+      <td>
+        {{transaction.sum / 100}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="!transactions || !transactions.length">Транзакций нет, но вы держитесь</div>

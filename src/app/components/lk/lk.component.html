@@ -92,6 +92,9 @@
         (click)="saveCameras()"
         class="button button--full">пополнить счет</button>
       </div>
+      <div class="row">
+        <app-transactions [isSuperuser]='userModel.is_superuser'></app-transactions>
+      </div>
     </div>
     <!-- <div class="block block--internet internet">
       <div class="internet__title">
