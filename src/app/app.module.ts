@@ -16,6 +16,7 @@ import { reducers } from './store';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { ResetComponent } from './components/reset/reset.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
+import { TransactionStatusPipe } from './pipes/transaction-status/transaction-status.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TransactionsComponent } from './components/transactions/transactions.co
     ProfileComponent,
     LkComponent,
     ResetComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    TransactionStatusPipe
   ],
   imports: [
     BrowserModule,

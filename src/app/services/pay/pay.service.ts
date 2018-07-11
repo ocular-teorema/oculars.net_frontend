@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PayModule } from './pay.type';
 import { HttpService } from '../http/http.service';
-import { Observable } from '../../../../node_modules/rxjs';
+import { Observable } from 'rxjs';
 
 const PAY_CAM_URL = '/cam_pay/';
 const TRANSACTIONS_URL = '/transaction/';

@@ -1,11 +1,14 @@
 <h2 class="transactions-title">
-  Список транзакций
+  История транзакций
 </h2>
 <table class="transactions">
   <thead>
     <tr>
+      <td>
+        ID транзакции
+      </td>
       <td *ngIf="isSuperuser">
-        ID
+        ID Пользователя
       </td>
       <td>
         Статус
@@ -17,11 +20,14 @@
   </thead>
   <tbody *ngIf="transactions">
     <tr *ngFor="let transaction of transactions">
+      <td>
+        {{transaction.id}}
+      </td>
       <td *ngIf="isSuperuser">
         {{transaction.user_id}}
       </td>
       <td>
-        {{transaction.status}}
+        {{transaction.status | transactionStatus}}
       </td>
       <td>
         {{transaction.sum / 100}}
