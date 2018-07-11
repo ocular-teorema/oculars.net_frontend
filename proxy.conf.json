@@ -1,6 +1,6 @@
 {
   "/api/v1": {
-    "target": " http://oculars.net/api/v1",
+    "target": " https://oculars.net/api/v1",
     "pathRewrite": {
       "^/api/v1": ""
     },
