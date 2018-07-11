@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { UserModule } from '../../services/user/user.type';
 import { UserService } from '../../services/user/user.service';
-import { AddUser } from '../../store/actions';
 import { PayService } from '../../services/pay/pay.service';
 import { PayModule } from '../../services/pay/pay.type';
 
@@ -20,6 +19,7 @@ const PRICE_LIST = {
 })
 export class LkComponent implements OnInit, OnDestroy {
   private _lkSubscriptions = new Subscription();
+  public isHashAvailable: boolean;
   public userModel: UserModule.IUser;
   public camList = {
     s: 0,
@@ -38,6 +38,7 @@ export class LkComponent implements OnInit, OnDestroy {
       this.userModel = state.userModel;
     });
     this._lkSubscriptions.add(storeSubscription);
+    this.isHashAvailable = !!this.userModel.hardware_hash;
   }
 
   public addCamera(type: string): void {
@@ -61,9 +62,18 @@ export class LkComponent implements OnInit, OnDestroy {
       ...request,
       cam
     };
-    this._pay.camPay(request).subscribe(res => {
-      window.location.href = res.success_url;
-    });
+    const userSub = this._user
+      .changeProfile({
+        id: this.userModel.id,
+        hardware_hash: this.userModel.hardware_hash
+      })
+      .subscribe(res => {
+        const paySub = this._pay.camPay(request).subscribe(result => {
+          window.location.href = result.success_url;
+        });
+        this._lkSubscriptions.add(paySub);
+      });
+    this._lkSubscriptions.add(userSub);
   }
 
   ngOnDestroy() {
