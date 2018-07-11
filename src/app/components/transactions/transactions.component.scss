@@ -1,0 +1,27 @@
+:host {
+  width: 100%;
+}
+.transactions-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.transactions {
+  width: 100%;
+  td {
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+  }
+  thead {
+    td {
+      text-transform: uppercase;
+      font-weight: bold;
+      color: #838383;
+    }
+  }
+  tbody {
+    tr:nth-child(odd) {
+      background-color: #fafafa;
+    }
+  }
+}

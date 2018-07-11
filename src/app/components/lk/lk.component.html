@@ -4,10 +4,14 @@
   </h1>
   <div class="row">
     <div class="block block--table">
-      <!-- <div class="row id-input">
-        <div class="id">Введите id</div>
-        <input type="text">
-      </div> -->
+      <div class="row id-input">
+        <div class="id">{{isHashAvailable ? 'Ваш' : 'Введите'}} id</div>
+        <input
+          [(ngModel)]="userModel.hardware_hash"
+          [disabled]='isHashAvailable'
+          type="text"
+        >
+      </div>
       <table>
         <thead>
           <td>тип</td>
@@ -91,6 +95,9 @@
         <button [disabled]="(camList.f + camList.a + camList.s) === 0"
         (click)="saveCameras()"
         class="button button--full">пополнить счет</button>
+      </div>
+      <div class="row">
+        <app-transactions [isSuperuser]='userModel.is_superuser'></app-transactions>
       </div>
     </div>
     <!-- <div class="block block--internet internet">
