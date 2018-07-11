@@ -14,12 +14,13 @@ export namespace UserModule {
     id?: number;
     username?: string;
     hardware_hash?: string;
-    cam_list?: {
-      s?: number;
-      a?: number;
-      f?: number;
-    };
+    cam_list?: ICamSet;
     is_superuser?: boolean;
+  }
+  export interface ICamSet {
+    s?: number;
+    a?: number;
+    f?: number;
   }
   export interface INewPass {
     new_password1: string;
