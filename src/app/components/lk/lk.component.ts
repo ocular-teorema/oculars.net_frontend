@@ -64,20 +64,6 @@ export class LkComponent implements OnInit, OnDestroy {
     this._pay.camPay(request).subscribe(res => {
       window.location.href = res.success_url;
     });
-    // const userSubscription = this._user
-    //   .changeProfile({
-    //     id: this.userModel.id,
-    //     cam_list
-    //   })
-    //   .subscribe(profile => {
-    //     this._store.dispatch(new AddUser(profile));
-    //     this.camList = {
-    //       s: 0,
-    //       f: 0,
-    //       a: 0
-    //     };
-    //   });
-    //   this._lkSubscriptions.add(userSubscription);
   }
 
   ngOnDestroy() {
