@@ -17,6 +17,7 @@ import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { ResetComponent } from './components/reset/reset.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { TransactionStatusPipe } from './pipes/transaction-status/transaction-status.pipe';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { TransactionStatusPipe } from './pipes/transaction-status/transaction-st
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    TextMaskModule,
     StoreModule.forRoot(reducers)
   ],
   providers: [

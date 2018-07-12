@@ -16,6 +16,7 @@ export namespace UserModule {
     hardware_hash?: string;
     cam_list?: ICamSet;
     is_superuser?: boolean;
+    offline_code?: string;
   }
   export interface ICamSet {
     s?: number;

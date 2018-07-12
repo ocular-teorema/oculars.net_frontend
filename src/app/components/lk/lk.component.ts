@@ -5,6 +5,7 @@ import { UserModule } from '../../services/user/user.type';
 import { UserService } from '../../services/user/user.service';
 import { PayService } from '../../services/pay/pay.service';
 import { PayModule } from '../../services/pay/pay.type';
+import { AddUser } from '../../store/actions';
 
 const PRICE_LIST = {
   a: 450000,
@@ -20,6 +21,11 @@ const PRICE_LIST = {
 export class LkComponent implements OnInit, OnDestroy {
   private _lkSubscriptions = new Subscription();
   public isHashAvailable: boolean;
+  public mask = [/\d/, /\d/];
+  public maskData = {
+    mask: this.mask,
+    guide: false
+  };
   public userModel: UserModule.IUser;
   public camList = {
     s: 0,
@@ -36,17 +42,17 @@ export class LkComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const storeSubscription = this._store.select('common').subscribe(state => {
       this.userModel = state.userModel;
+      this.isHashAvailable = !!this.userModel.hardware_hash;
     });
     this._lkSubscriptions.add(storeSubscription);
-    this.isHashAvailable = !!this.userModel.hardware_hash;
   }
 
   public addCamera(type: string): void {
-    this.camList[type] += 1;
+    this.camList[type] = +this.camList[type] + 1;
   }
 
   public removeCamera(type: string): void {
-    this.camList[type] -= 1;
+    this.camList[type] = +this.camList[type] - 1;
   }
 
   public saveCameras(): void {
@@ -74,7 +80,9 @@ export class LkComponent implements OnInit, OnDestroy {
         id: this.userModel.id,
         hardware_hash: this.userModel.hardware_hash
       })
-      .subscribe(res => {});
+      .subscribe(res => {
+        this._store.dispatch(new AddUser(res));
+      });
     this._lkSubscriptions.add(userSub);
   }
 
