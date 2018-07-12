@@ -29,11 +29,12 @@
             <td>{{userModel.cam_list.s}}</td>
             <td>
               <div class="counter">
-                <button [disabled]="camList.s === 0"
+                <button [disabled]="!camList.s"
                 (click)="removeCamera('s')"
                 class="button button--minus">–</button>
-                <input [(ngModel)]="camList.s" type="number">
+                <input [(ngModel)]="camList.s" type="text" [textMask]="maskData">
                 <button (click)="addCamera('s')"
+                [disabled]="camList.s > 98"
                 class="button button--plus">+</button>
               </div>
             </td>
@@ -50,8 +51,9 @@
                 <button [disabled]="camList.a === 0"
                 (click)="removeCamera('a')"
                 class="button button--minus">–</button>
-                <input [(ngModel)]="camList.a" type="number">
+                <input [(ngModel)]="camList.a" type="text" [textMask]="maskData">
                 <button (click)="addCamera('a')"
+                [disabled]="camList.a > 98"
                 class="button button--plus">+</button>
               </div>
             </td>
@@ -68,8 +70,9 @@
                 <button [disabled]="camList.f === 0"
                   (click)="removeCamera('f')" 
                   class="button button--minus">–</button>
-                <input [(ngModel)]="camList.f" type="number">
+                <input [(ngModel)]="camList.f" type="number" [textMask]="maskData">
                 <button (click)="addCamera('f')"
+                  [disabled]="camList.f > 98"
                   class="button button--plus">+</button>
               </div>
             </td>

@@ -20,6 +20,11 @@ const PRICE_LIST = {
 export class LkComponent implements OnInit, OnDestroy {
   private _lkSubscriptions = new Subscription();
   public isHashAvailable: boolean;
+  public mask = [/\d/, /\d/];
+  public maskData = {
+    mask: this.mask,
+    guide: false
+  };
   public userModel: UserModule.IUser;
   public camList = {
     s: 0,
@@ -42,11 +47,11 @@ export class LkComponent implements OnInit, OnDestroy {
   }
 
   public addCamera(type: string): void {
-    this.camList[type] += 1;
+    this.camList[type] = +this.camList[type] + 1;
   }
 
   public removeCamera(type: string): void {
-    this.camList[type] -= 1;
+    this.camList[type] = +this.camList[type] - 1;
   }
 
   public saveCameras(): void {
