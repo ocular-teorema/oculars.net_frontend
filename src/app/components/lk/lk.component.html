@@ -6,123 +6,115 @@
     <div class="block block--table">
       <div class="row id-input">
         <div class="id">{{isHashAvailable ? 'Ваш' : 'Введите'}} id</div>
-        <input
-          [(ngModel)]="userModel.hardware_hash"
-          [disabled]='isHashAvailable'
-          type="text"
-        >
+        <input [(ngModel)]="userModel.hardware_hash"
+        [disabled]='isHashAvailable' type="text">
         <button *ngIf="!isHashAvailable"
-        (click)="saveId()"
-        class="button button--full">сохранить</button>
+        (click)="saveId()" class="button button--full">
+          сохранить
+        </button>
       </div>
-      <table>
-        <thead>
-          <td>тип</td>
-          <td>оплачено</td>
-          <td>добавить</td>
-          <td>цена за камеру</td>
-          <td>Всего</td>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Хранение</td>
-            <td>{{userModel.cam_list.s}}</td>
-            <td>
-              <div class="counter">
-                <button [disabled]="!camList.s"
-                (click)="removeCamera('s')"
-                class="button button--minus">–</button>
-                <input [(ngModel)]="camList.s" type="text" [textMask]="maskData">
-                <button (click)="addCamera('s')"
-                [disabled]="camList.s > 98"
-                class="button button--plus">+</button>
-              </div>
-            </td>
-            <td>2500 Р</td>
-            <td>
-              <b>{{camList.s * 2500}} Р</b>
-            </td>
-          </tr>
-          <tr>
-            <td>Аналитика</td>
-            <td>{{userModel.cam_list.a}}</td>
-            <td>
-              <div class="counter">
-                <button [disabled]="camList.a === 0"
-                (click)="removeCamera('a')"
-                class="button button--minus">–</button>
-                <input [(ngModel)]="camList.a" type="text" [textMask]="maskData">
-                <button (click)="addCamera('a')"
-                [disabled]="camList.a > 98"
-                class="button button--plus">+</button>
-              </div>
-            </td>
-            <td>4500 Р</td>
-            <td>
-              <b>{{camList.a * 4500}} Р</b>
-            </td>
-          </tr>
-          <tr>
-            <td>Полный анализ</td>
-            <td>{{userModel.cam_list.f}}</td>
-            <td>
-              <div class="counter">
-                <button [disabled]="camList.f === 0"
-                  (click)="removeCamera('f')" 
+      <div *ngIf="userModel.offline_code">
+        <table>
+          <thead>
+            <td>тип</td>
+            <td>оплачено</td>
+            <td>добавить</td>
+            <td>цена за камеру</td>
+            <td>Всего</td>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Хранение</td>
+              <td>{{userModel.cam_list.s}}</td>
+              <td>
+                <div class="counter">
+                  <button [disabled]="!camList.s"
+                  (click)="removeCamera('s')"
                   class="button button--minus">–</button>
-                <input [(ngModel)]="camList.f" type="number" [textMask]="maskData">
-                <button (click)="addCamera('f')"
+                  <input [(ngModel)]="camList.s"
+                  type="text" [textMask]="maskData">
+                  <button (click)="addCamera('s')"
+                  [disabled]="camList.s > 98"
+                  class="button button--plus">+</button>
+                </div>
+              </td>
+              <td>2500 Р</td>
+              <td>
+                <b>{{camList.s * 2500}} Р</b>
+              </td>
+            </tr>
+            <tr>
+              <td>Аналитика</td>
+              <td>{{userModel.cam_list.a}}</td>
+              <td>
+                <div class="counter">
+                  <button [disabled]="camList.a === 0"
+                  (click)="removeCamera('a')"
+                  class="button button--minus">–</button>
+                  <input [(ngModel)]="camList.a"
+                  type="text" [textMask]="maskData">
+                  <button (click)="addCamera('a')"
+                  [disabled]="camList.a > 98"
+                  class="button button--plus">+</button>
+                </div>
+              </td>
+              <td>4500 Р</td>
+              <td>
+                <b>{{camList.a * 4500}} Р</b>
+              </td>
+            </tr>
+            <tr>
+              <td>Полный анализ</td>
+              <td>{{userModel.cam_list.f}}</td>
+              <td>
+                <div class="counter">
+                  <button [disabled]="camList.f === 0"
+                  (click)="removeCamera('f')"
+                  class="button button--minus">–</button>
+                  <input [(ngModel)]="camList.f"
+                  type="number" [textMask]="maskData">
+                  <button (click)="addCamera('f')"
                   [disabled]="camList.f > 98"
                   class="button button--plus">+</button>
-              </div>
-            </td>
-            <td>7000 Р</td>
-            <td>
-              <b>{{camList.f * 7000}} Р</b>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="summary">
-              <div class="summary__title">
-                итого
-              </div>
-              <div class="summary__number">
-                {{camList.s * 2500 + camList.a * 4500 + camList.f * 7000}} Р
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="row row--right">
-        <button [disabled]="!isHashAvailable || ((camList.f + camList.a + camList.s) === 0)"
-        (click)="saveCameras()"
-        class="button button--full">пополнить счет</button>
-      </div>
-      <div class="row">
-        <app-transactions [isSuperuser]='userModel.is_superuser'></app-transactions>
+                </div>
+              </td>
+              <td>7000 Р</td>
+              <td>
+                <b>{{camList.f * 7000}} Р</b>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="summary">
+                <div class="summary__title">
+                  итого
+                </div>
+                <div class="summary__number">
+                  {{camList.s * 2500 + camList.a * 4500 + camList.f * 7000}} Р
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row row--right">
+          <button [disabled]="!isHashAvailable || ((camList.f + camList.a + camList.s) === 0)"
+          (click)="saveCameras()" class="button button--full">пополнить счет</button>
+        </div>
+        <div class="row">
+          <app-transactions [isSuperuser]='userModel.is_superuser'></app-transactions>
+        </div>
       </div>
     </div>
-    <!-- <div class="block block--internet internet">
+    <div *ngIf="userModel.offline_code" class="block block--internet internet">
       <div class="internet__title">
-        Нет подключения к интеренету?
+        Оффлайн хэш
       </div>
       <div class="internet__text">
-        Подключить услуги вы можно на любом компьютере, с доступом в интернет.
-        <br> 1. Скопируйте персональный ID
-        <br>
-        <div class="hash">59163130510</div>
-        2. На компьюетере с доступом в интернет перейдите на страницу lk.oculars.net
-        <br> 3. Введите персональный ID
-        <br> 4. Выберите требуемые услуги
-        <br> 5. Получите код активации после оплаты услуг
-        <br> 6. Введите полученный код
+        <div class="hash">{{userModel.offline_code}}</div>
       </div>
-      <input type="text">
-      <button class="button">Применить</button>
-    </div> -->
+    </div>
   </div>
 </section>
