@@ -5,6 +5,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { LkComponent } from './components/lk/lk.component';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { ResetComponent } from './components/reset/reset.component';
+import { DownloadComponent } from './components/download/download.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'account', pathMatch: 'full' },
@@ -19,7 +21,8 @@ const routes: Routes = [
         component: ProfileComponent,
         canActivate: [AuthGuardService]
       },
-      { path: 'lk', component: LkComponent, canActivate: [AuthGuardService] }
+      { path: 'lk', component: LkComponent, canActivate: [AuthGuardService] },
+      { path: 'download', component: DownloadComponent, canActivate: [AuthGuardService] }
     ]
   }
 ];

@@ -17,7 +17,9 @@ import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { ResetComponent } from './components/reset/reset.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { TransactionStatusPipe } from './pipes/transaction-status/transaction-status.pipe';
+import { DownloadComponent } from './components/download/download.component';
 import { TextMaskModule } from 'angular2-text-mask';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     LkComponent,
     ResetComponent,
     TransactionsComponent,
-    TransactionStatusPipe
+    TransactionStatusPipe,
+    DownloadComponent,
   ],
   imports: [
     BrowserModule,
